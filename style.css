@@ -1,0 +1,178 @@
+@charset 'utf-8';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* user-select
+aldksgkqslek tkfkdgkqslek dydtjgktpdy rhakqtmqslek 
+user-select : all; ▶ 더블클릭이 아닌 클릭 만으로도 선택이 가능 
+user-select : none; ▶ 텍스트 선택 불가
+user-select : text; ▶ 텍스트 선택 가능 
+user-select : auto; ▶ Default 값, 브라우저 허용 시 텍스트 선택 가능
+*/
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #222;
+}
+
+.section {
+  transition: .5s;
+}
+
+.body__container {
+  transition: .5s;
+}
+
+.box__container {
+  position: relative;
+  top: -120px;
+  width: 400px;
+  height: 400px;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateY(250deg);
+  transition: 1.5s;
+}
+
+.box__container::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  width: 400px;
+  height: 480px;
+  background: #777;
+  transform: translateY(240px) rotateX(90deg) scale(1.1);
+  filter: blur(40px);
+  z-index: 99;
+}
+
+.card {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 480px;
+  background: linear-gradient(90deg, #ddd, #eee);
+  transform: rotateY(calc(var(--i) * 90deg)) translateZ(200px);
+  transform-style: preserve-3d;
+  transform-origin: center;
+}
+
+.card .box__image {
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+
+.card .box__image img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+}
+
+.card h2 {
+  position: relative;
+  top: 10px;
+  width: 400px;
+  line-height: 1.3em;
+  transform: translateZ(10px);
+  transform-style: preserve-3d;
+  font-size: 1.3em;
+  font-weight: 500;
+  letter-spacing: 1.4px;
+  text-align: center;
+  text-transform: uppercase;
+  backface-visibility: hidden;
+}
+
+/* backface-visibility
+요소의 뒷쪽에서 앞면이 보이게 할지 정하는 속성
+visible : 보이는 값, 디폴트값
+hidden : 보이지 않게 합니다.
+initial : 기본값으로 설정
+inherit : 부모 요소의 속성값을 상속 */
+
+.card h2 span {
+  font-size: 1.1em;
+  color: #f44336;
+  letter-spacing: 1.4px;
+}
+
+.box__slide-btns {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 100px;
+  display: flex;
+  gap: 40px;
+}
+
+.box__slide-btns div {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background-color: crimson;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box__slide-btns div:active {
+  background-color: #333;
+}
+
+.box__slide-btns div::before {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-top: 3px solid #fff;
+  border-right: 3px solid #fff;
+  transform: rotate(45deg) translate(-2.5px, 2.5px);
+}
+
+.box__slide-btns div.prev::before {
+  transform: rotate(225deg) translate(-2.5px, 2.5px);
+}
+
+.box__slide-btns div:active::before {
+  border-top: 3px solid #fff;
+  border-right: 3px solid #fff;
+}
+
+@media (max-width: 600px) {
+
+  .body__container,
+  .box__container {
+    transform: scale(0.9);
+  }
+
+  .box__slide-btns {
+    margin-top: 80px;
+  }
+}
+
+@media (max-width: 420px) {
+
+  .body__container,
+  .box__container {
+    transform: scale(0.8);
+  }
+
+  .box__slide-btns {
+    margin-top: 50px;
+  }
+}
